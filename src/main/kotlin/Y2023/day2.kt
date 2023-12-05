@@ -3,27 +3,27 @@ package Y2023
 import Day
 
 
-// Convert a line to a map of colour: max count
-fun maximumCounts(game: String): Map<String, Int> {
-    val (_, pulls) = game.split(": ")
-
-    val colourMax = mutableMapOf(
-        "red" to 0,
-        "green" to 0,
-        "blue" to 0,
-    )
-
-    pulls.split("(,|;) ".toRegex()).forEach {
-        val (num, col) = it.split(" ")
-        colourMax[col] = maxOf(num.toInt(), colourMax[col]!!)
-    }
-
-    return colourMax
-}
-
-
 val day2 = Day(2023, 2) {
     val input by fetchInput()
+
+
+    // Convert a line to a map of colour: max count
+    fun maximumCounts(game: String): Map<String, Int> {
+        val (_, pulls) = game.split(": ")
+
+        val colourMax = mutableMapOf(
+            "red" to 0,
+            "green" to 0,
+            "blue" to 0,
+        )
+
+        pulls.split("[,;] ".toRegex()).forEach {
+            val (num, col) = it.split(" ")
+            colourMax[col] = maxOf(num.toInt(), colourMax[col]!!)
+        }
+
+        return colourMax
+    }
 
 
     // === Part 1 === //

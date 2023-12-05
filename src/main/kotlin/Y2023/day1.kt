@@ -6,18 +6,6 @@ import Day
 val day1 = Day(2023, 1) {
     val input by fetchInput()
 
-
-    // === First part === //
-    puzzle {
-        input.split('\n')
-            .filter(kotlin.String::isNotEmpty)
-            .sumOf {
-                10 * it.first(kotlin.Char::isDigit).digitToInt() + it.last(kotlin.Char::isDigit).digitToInt()
-            }.toString()
-    }
-
-
-    // === Second part === //
     // Create mapping of digit names to integer counterparts
     val digitMap = mapOf(
         "one" to 1,
@@ -56,6 +44,18 @@ val day1 = Day(2023, 1) {
         return null
     }
 
+
+    // === First part === //
+    puzzle {
+        input.split('\n')
+            .filter(kotlin.String::isNotEmpty)
+            .sumOf {
+                10 * it.first(kotlin.Char::isDigit).digitToInt() + it.last(kotlin.Char::isDigit).digitToInt()
+            }.toString()
+    }
+
+
+    // === Second part === //
     puzzle {
         input.split('\n')
             .filter(kotlin.String::isNotEmpty)
