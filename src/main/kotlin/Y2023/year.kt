@@ -6,4 +6,5 @@ val Y2023 = listOf(
     day3,
     day4,
     day5,
+    day6,
 )
