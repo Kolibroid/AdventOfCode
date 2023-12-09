@@ -20,6 +20,15 @@ fun main(args: Array<String>) {
         remainingArgs.remove("-b")
     }
 
+    val list = remainingArgs.contains("-l")
+    if (list) {
+        remainingArgs.remove("-l")
+    }
+
+    if (list && benchmark) {
+        println("Warning: list (-l) overrides benchmark (-b)")
+    }
+
     // Collect all puzzles requested
     val allPuzzles = listOfPuzzles(listOf(
         Y2023.Y2023
@@ -42,19 +51,29 @@ fun main(args: Array<String>) {
 
     // Run the puzzles and print results (& benchmark times)
     for (p in puzzles) {
-        println("=== Running year ${p.day.year}, day ${p.day.day}, puzzle ${p.partNumber} ===")
-        println(p.run())
+        if (list) {
+            println("${p.day.year}/${p.day.day}/${p.partNumber}")
+        } else {
+            println("=== Running year ${p.day.year}, day ${p.day.day}, puzzle ${p.partNumber} ===")
+            println(p.run())
 
-        if (benchmark) {
-            val time = measureTime {
-                repeat(BENCHMARK_RERUNS) {
-                    p.run()
+            if (benchmark) {
+                val time = measureTime {
+                    repeat(BENCHMARK_RERUNS) {
+                        p.run()
+                    }
                 }
+
+                println("Took ${time.inWholeMilliseconds}mS / $BENCHMARK_RERUNS = ${time.inWholeMilliseconds / BENCHMARK_RERUNS} milliseconds per run")
             }
 
-            println("Took ${time.inWholeMilliseconds}mS / $BENCHMARK_RERUNS = ${time.inWholeMilliseconds / BENCHMARK_RERUNS} milliseconds per run")
+            println()
         }
+    }
 
-        println()
+    // Warn the user if no puzzles were run
+    if (puzzles.isEmpty()) {
+        println("No puzzles match $year/$day/$puzzle")
+        println("Use -l /*/*/* to list all puzzles")
     }
 }
