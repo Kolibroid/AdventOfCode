@@ -60,7 +60,7 @@ val day7 = Day(2023, 7) {
     }
 
 
-    // === Puzzle one === //
+    // === Part one === //
     val handComparator = HandComparator("23456789TJQKA", ::typeScore)
 
     puzzle {
@@ -89,7 +89,7 @@ val day7 = Day(2023, 7) {
         }
     }
 
-    // === Puzzle two === //
+    // === Part two === //
     val jokerHandComparator = HandComparator("J23456789TQKA", ::jokerTypeScore)
 
     puzzle {
